@@ -1,24 +1,43 @@
 import React, { useState } from 'react'
+import './App.css';
+import Header from './components/Header';
+import Form from './components/Form';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 function App() {
 
-  const [list, setList] = useState([]);
+  const [todos, setTodos] = useState([]);
   const [input, setInput] = useState("");
+  const [state, setState]= useState(false);
 
-  return (
-    <div>
-      <h1>Todo List</h1>
-      <input
-      type="text"
-      value={input}
-      />
-      <button>Add</button>
-      <button>Delete</button>
+  
+    return (
+    <div className='container'>
+      <div className='app-wrapper'>
+      <div>
+        <Header />
+      </div>
+      <div>
+        <Form 
+        input={input}
+        setInput={setInput}
+        todos={todos}
+        setTodos={setTodos}
+        />
+       
+      </div>
+      </div>
+    </div>)
+  }
+
+            
+    
 
 
-    </div>
 
-  )
-}
+    
 
-export default App
+  
+
+
+export default App;

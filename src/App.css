@@ -3,7 +3,6 @@ div {
   text-align: center;
 }
 
-
 * {
   margin: 0;
   padding: 0
@@ -43,6 +42,7 @@ div {
   background-color: #000000;
   border: 1px solid #c89666;
   border-radius: 10px;
+  
 }
 button-add {
   width: 70px;

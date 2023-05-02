@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import './App.css';
 import Header from './components/Header';
 import Form from './components/Form';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import TodosList from './components/TodosList';
 
 function App() {
 
@@ -24,10 +24,13 @@ function App() {
         todos={todos}
         setTodos={setTodos}
         />
-       
+      </div>
+      <div>
+        <TodosList todos={todos} setTodos={setTodos} />
       </div>
       </div>
-    </div>)
+    </div>
+    )
   }
 
             

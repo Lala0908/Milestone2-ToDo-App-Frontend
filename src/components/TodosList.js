@@ -1,7 +1,7 @@
 import React from 'react';
 
-const TodosList = ((todos, setTodos) => {
-    return(
+const TodosList = ({todos, setTodos}) => {
+    return (
         <div>
             {todos.map((todo) => (
                 <li className='list-item' key={todo.id}>
@@ -11,6 +11,6 @@ const TodosList = ((todos, setTodos) => {
             ))}
         </div>
     )
-})
+}
 
-export default TodosList
+export default TodosList;

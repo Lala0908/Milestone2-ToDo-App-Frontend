@@ -65,6 +65,26 @@ const Form = ({
       );
       const refreshedTodos = await refreshTodoResponse.json();
 
+      // const handleDelete = ({ id }) => {
+      //   const handleDelete = async ({ id }) => {
+      //     console.log("delete")
+      //     // fetch with a DELETE method
+      //     const deleteMethod =  await fetch("http://localhost:8080/delete-todo", {
+      //         method: "DELETE",
+      //         headers: {
+      //           "Content-Type": "application/json",
+      //         },
+      
+      //         const deletedTodo = await deletedTodoResponse.json();
+      //       })
+      //       .then(response => {
+      //         return response.json( )
+      //         .then(data => console.log(data))
+      //     })
+      //       setTodos(deletedTodo)
+      //     setTodos(todos.filter((todo) => todo.id !== id));
+      
+      //   };
       // Save the updated todo list
       setTodos(refreshedTodos);
 

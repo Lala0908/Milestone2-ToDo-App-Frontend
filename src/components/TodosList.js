@@ -1,5 +1,9 @@
 import React from "react";
 
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 const TodosList = ({ todos, setTodos, setEditTodo }) => {
   const handleComplete = async (todo) => {
     // PUT: Toggle the completed state
@@ -12,7 +16,10 @@ const TodosList = ({ todos, setTodos, setEditTodo }) => {
         },
       }
     );
+
     const updatedTodo = await updatedTodoResponse.json();
+
+    await sleep(1000);
 
     // GET: Fetch the updated todo list
     const refreshTodoResponse = await fetch(
@@ -21,20 +28,44 @@ const TodosList = ({ todos, setTodos, setEditTodo }) => {
         method: "GET",
       }
     );
+
+    const refreshedTodos = await refreshTodoResponse.json();
+
+    // Save the updated todo list
+    setTodos([...refreshedTodos]);
+  };
+
+  // const handleEdit = ({ id }) => {
+  //   const findTodo = todos.find((todo) => todo.id === id);
+  //   setEditTodo(findTodo);
+  // };
+
+  const handleDelete = async (todo) => {
+    // fetch with a DELETE method
+    const deletedTodoResponse = await fetch(
+      `http://localhost:8080/todo/${todo._id}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    const deletedTodo = await deletedTodoResponse.json();
+
+    // GET: Fetch the updated todo list
+    const refreshTodoResponse = await fetch(
+      `http://localhost:8080/todo?userID=${deletedTodo.userID}`,
+      {
+        method: "GET",
+      }
+    );
+
     const refreshedTodos = await refreshTodoResponse.json();
 
     // Save the updated todo list
     setTodos(refreshedTodos);
-  };
-
-  const handleEdit = ({ id }) => {
-    const findTodo = todos.find((todo) => todo.id === id);
-    setEditTodo(findTodo);
-  };
-
-  const handleDelete = ({ id }) => {
-    // fetch with a DELETE method
-    setTodos(todos.filter((todo) => todo.id !== id));
   };
 
   return (
@@ -54,12 +85,12 @@ const TodosList = ({ todos, setTodos, setEditTodo }) => {
             >
               <i className="fa fa-check-circle"></i>
             </button>
-            <button
+            {/* <button
               className="button-edit task-button"
               onClick={() => handleEdit(todo)}
             >
               <i className="fa fa-edit"></i>
-            </button>
+            </button> */}
             <button
               className="button-delete task-button"
               onClick={() => handleDelete(todo)}
